@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,19 +16,18 @@ part 'get_all_customers_state.dart';
 class GetAllCustomersCubit extends Cubit<GetAllCustomersState> {
   GetAllCustomersCubit() : super(GetAllCustomersInitial());
 
-  void getAllCustomers()async{
+  void getAllCustomers() async {
     getIt<LoadingCubit>().show();
     emit(GetAllCustomersLoading());
-    Either<AppError,List<CustomerModel>> responseData=await ApiCallWithError.call(() async{
+    Either<AppError, List<CustomerModel>> responseData = await ApiCallWithError.call(() async {
       return await CustomerRepository.getAllCustomers();
     });
 
-    responseData.fold((l){
-      emit(GetAllCustomersFailed(appError: AppError(l.errorType,error: l.error)));
-    }, (r){
+    responseData.fold((l) {
+      emit(GetAllCustomersFailed(appError: AppError(l.errorType, error: l.error)));
+    }, (r) {
       emit(GetAllCustomersSuccess(listofCustomerModel: r));
     });
     getIt<LoadingCubit>().hide();
   }
-
 }

@@ -9,7 +9,6 @@ class DatabaseInitial extends DatabaseState {
   List<Object> get props => [];
 }
 
-
 class DatabaseInitializationLoading extends DatabaseState {
   @override
   List<Object> get props => [];
@@ -22,7 +21,9 @@ class DatabaseInitializationSuccess extends DatabaseState {
 
 class DatabaseInitializationFailed extends DatabaseState {
   final AppError appError;
+
   const DatabaseInitializationFailed({required this.appError});
+
   @override
   List<Object> get props => [appError];
 }

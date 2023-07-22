@@ -16,15 +16,17 @@ class RouteGenerator {
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context)=> getIt<DatabaseCubit>()..initializeDataBase()),
-            BlocProvider(create: (context)=> getIt<AddNewCustomerCubit>()),
-            BlocProvider(create: (context)=> getIt<GetAllCustomersCubit>()),
-            BlocProvider(create: (context)=> getIt<AddNewProductCubit>()),
-            BlocProvider(create: (context)=> getIt<GetAllProductsCubit>()),
-          ],
-            child: const HomeScreen(),));
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (context) => getIt<DatabaseCubit>()..initializeDataBase()),
+                    BlocProvider(create: (context) => getIt<AddNewCustomerCubit>()),
+                    BlocProvider(create: (context) => getIt<GetAllCustomersCubit>()),
+                    BlocProvider(create: (context) => getIt<AddNewProductCubit>()),
+                    BlocProvider(create: (context) => getIt<GetAllProductsCubit>()),
+                  ],
+                  child: const HomeScreen(),
+                ));
 
       default:
         return MaterialPageRoute(

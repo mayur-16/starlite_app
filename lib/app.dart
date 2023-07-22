@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starlite_app/core/navigation_service.dart';
 import 'package:starlite_app/get_it/get_it.dart';
-import 'package:starlite_app/presentation/cubits/database/database_cubit.dart';
 import 'package:starlite_app/presentation/cubits/util_cubits/loading_cubit.dart';
 import 'package:starlite_app/presentation/routes/route_generator.dart';
 import 'package:starlite_app/presentation/routes/routes.dart';

@@ -13,19 +13,16 @@ class NavigationService {
     return navigationKey.currentState!.context;
   }
 
-  pushNamedAndRemoveUntil(String rn, bool Function(Route<dynamic>) predicate,
-      {Object? arguments}) {
-    return navigationKey.currentState
-        ?.pushNamedAndRemoveUntil(rn, predicate, arguments: arguments);
+  pushNamedAndRemoveUntil(String rn, bool Function(Route<dynamic>) predicate, {Object? arguments}) {
+    return navigationKey.currentState?.pushNamedAndRemoveUntil(rn, predicate, arguments: arguments);
   }
 
-  pushAndRemoveUntil(
-      Route<Object> rn, bool Function(Route<dynamic>) predicate) {
+  pushAndRemoveUntil(Route<Object> rn, bool Function(Route<dynamic>) predicate) {
     return navigationKey.currentState?.pushAndRemoveUntil(rn, predicate);
   }
 
   pushReplacementNamed(String rn, {Object? arguments}) {
-    return navigationKey.currentState?.pushReplacementNamed(rn,arguments: arguments);
+    return navigationKey.currentState?.pushReplacementNamed(rn, arguments: arguments);
   }
 
   pushReplacement(Route<Object> rn) {
@@ -37,8 +34,7 @@ class NavigationService {
   }
 
   push(Widget rn) {
-    return navigationKey.currentState
-        ?.push(MaterialPageRoute(builder: (context) => rn));
+    return navigationKey.currentState?.push(MaterialPageRoute(builder: (context) => rn));
   }
 
   pop() {

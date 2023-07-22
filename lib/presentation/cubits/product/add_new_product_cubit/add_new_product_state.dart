@@ -9,7 +9,6 @@ class AddNewProductInitial extends AddNewProductState {
   List<Object> get props => [];
 }
 
-
 class AddNewProductLoading extends AddNewProductState {
   @override
   List<Object> get props => [];
@@ -22,7 +21,9 @@ class AddNewProductSuccess extends AddNewProductState {
 
 class AddNewProductFailed extends AddNewProductState {
   final AppError appError;
+
   const AddNewProductFailed({required this.appError});
+
   @override
   List<Object> get props => [appError];
 }

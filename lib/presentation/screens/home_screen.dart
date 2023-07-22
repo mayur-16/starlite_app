@@ -5,8 +5,8 @@ import 'package:starlite_app/presentation/screens/loading_screen.dart';
 
 import '../../common/utils.dart';
 import '../cubits/database/database_cubit.dart';
+import '../cubits/product/add_new_product_cubit/add_new_product_cubit.dart';
 import '../cubits/product/get_all_products_cubit/get_all_products_cubit.dart';
-import '../widgets/add_products_dialogbox.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -66,10 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton.extended(
           label: const Text('Add Product'),
           onPressed: () {
-            showDialog(context: context, builder: (_){
-              return const AddProductDialogBox();
-            });
+            context.read<AddNewProductCubit>().addNewProduct(name: 'beats 122', description: 'beats', stock: 96, price: 899);
 
+            // showDialog(context: context, builder: (BuildContext context){
+            //   return const AddProductDialogBox();
+            //   return BlocProvider(
+            //       create: (context)=> getIt<AddNewProductCubit>(),
+            //       child: const AddProductDialogBox());
+            // });
           },
         ),
       ),

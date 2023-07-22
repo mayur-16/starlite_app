@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:gap/gap.dart';
 import 'package:starlite_app/presentation/theme/theme_extension.dart';
+
+import '../cubits/product/add_new_product_cubit/add_new_product_cubit.dart';
 
 class AddProductDialogBox extends StatefulWidget {
   const AddProductDialogBox({Key? key}) : super(key: key);
@@ -100,6 +103,12 @@ class _AddProductDialogBoxState extends State<AddProductDialogBox> {
         ElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
+                String productnameValue = _formKey.currentState!.fields['productname']?.value;
+                String? productdescValue = _formKey.currentState!.fields['productdesc']?.value;
+                int stockValue = int.parse(_formKey.currentState!.fields['stock']?.value);
+                int productpriceValue = int.parse(_formKey.currentState!.fields['productprice']?.value);
+
+                context.read<AddNewProductCubit>().addNewProduct(name: productnameValue, description: productdescValue, stock: stockValue, price: productpriceValue);
                 Navigator.of(context).pop();
               }
             },

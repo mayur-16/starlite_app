@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,27 +16,26 @@ part 'add_new_product_state.dart';
 class AddNewProductCubit extends Cubit<AddNewProductState> {
   AddNewProductCubit() : super(AddNewProductInitial());
 
-  void addNewProduct({required String name,String? description,required int stock,required int price})async{
+  void addNewProduct({required String name, String? description, required int stock, required int price}) async {
     getIt<LoadingCubit>().show();
     emit(AddNewProductLoading());
-    Either<AppError,bool> responseData=await ApiCallWithError.call(() async{
-      return await ProductRepository.addNewProduct(name: name, price: price);
+    Either<AppError, bool> responseData = await ApiCallWithError.call(() async {
+      return await ProductRepository.addNewProduct(name: name, price: price, stock: stock);
     });
 
-    responseData.fold((l){
-      emit(AddNewProductFailed(appError: AppError(l.errorType,error: l.error)));
-    }, (r){
-      if(r){
-        getIt<GetAllProductsCubit>().getAllProducts();
+    responseData.fold((l) {
+      emit(AddNewProductFailed(appError: AppError(l.errorType, error: l.error)));
+    }, (r) {
+      if (r) {
         emit(AddNewProductSuccess());
-      }else{
-        emit(const AddNewProductFailed(appError: AppError(AppErrorType.database,error: 'Something went wrong!')));
+        getIt<GetAllProductsCubit>().getAllProducts();
+      } else {
+        emit(const AddNewProductFailed(appError: AppError(AppErrorType.database, error: 'Something went wrong!')));
 
         // hide loader only when api failed because on success were triggering another api so no use...
-        getIt<LoadingCubit>().hide();
+        // getIt<LoadingCubit>().hide();
       }
-
     });
+    getIt<LoadingCubit>().hide();
   }
-
 }

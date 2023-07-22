@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,18 +15,19 @@ part 'database_state.dart';
 class DatabaseCubit extends Cubit<DatabaseState> {
   DatabaseCubit() : super(DatabaseInitial());
 
-  void initializeDataBase()async{
+  /// initialize database
+  void initializeDataBase() async {
     getIt<LoadingCubit>().show();
     emit(DatabaseInitializationLoading());
-    Either<AppError,bool> responseData=await ApiCallWithError.call(() async{
-       await LocalDataBaseClient.initializeDataBase();
-       return true;
+    Either<AppError, bool> responseData = await ApiCallWithError.call(() async {
+      await LocalDataBaseClient.initializeDataBase();
+      return true;
     });
 
-    responseData.fold((l){
-      emit(DatabaseInitializationFailed(appError: AppError(l.errorType,error: l.error)));
-    }, (r){
-        emit(DatabaseInitializationSuccess());
+    responseData.fold((l) {
+      emit(DatabaseInitializationFailed(appError: AppError(l.errorType, error: l.error)));
+    }, (r) {
+      emit(DatabaseInitializationSuccess());
     });
 
     getIt<LoadingCubit>().hide();

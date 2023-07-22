@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,25 +16,23 @@ part 'add_new_customer_state.dart';
 class AddNewCustomerCubit extends Cubit<AddNewCustomerState> {
   AddNewCustomerCubit() : super(AddNewCustomerInitial());
 
-void addNewCustomer({required String name,String? location})async{
-  getIt<LoadingCubit>().show();
-  emit(AddNewCustomerLoading());
-  Either<AppError,bool> responseData=await ApiCallWithError.call(() async{
-    return await CustomerRepository.addNewCustomer(name: name,location: location);
-  });
+  void addNewCustomer({required String name, String? location}) async {
+    getIt<LoadingCubit>().show();
+    emit(AddNewCustomerLoading());
+    Either<AppError, bool> responseData = await ApiCallWithError.call(() async {
+      return await CustomerRepository.addNewCustomer(name: name, location: location);
+    });
 
-  responseData.fold((l){
-    emit(AddNewCustomerFailed(appError: AppError(l.errorType,error: l.error)));
-  }, (r){
-    if(r){
-      getIt<GetAllCustomersCubit>().getAllCustomers();
-      emit(AddNewCustomerSuccess());
-    }else{
-      emit(const AddNewCustomerFailed(appError: AppError(AppErrorType.database,error: 'Something went wrong!')));
-      getIt<LoadingCubit>().hide();
-    }
-
-  });
-
-}
+    responseData.fold((l) {
+      emit(AddNewCustomerFailed(appError: AppError(l.errorType, error: l.error)));
+    }, (r) {
+      if (r) {
+        getIt<GetAllCustomersCubit>().getAllCustomers();
+        emit(AddNewCustomerSuccess());
+      } else {
+        emit(const AddNewCustomerFailed(appError: AppError(AppErrorType.database, error: 'Something went wrong!')));
+        getIt<LoadingCubit>().hide();
+      }
+    });
+  }
 }
