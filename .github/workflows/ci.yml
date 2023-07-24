@@ -40,19 +40,12 @@ jobs:
       - name: Set up Firebase service account
         run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_CONTENT }}" > service-account.json
 
-       # - name: Authenticate Firebase CLI
-       # env:
-       #   GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
-       # run: |
-       #   npm install -g firebase-tools
-       #   firebase logout
-      #    firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
 
-      #      - name: Analyze
-      #        run: flutter analyze
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
-      #- name: Set up google-services.json
-       # run: echo "${{ secrets.GOOGLE_SERVICES_JSON_CONTENT }}" > app/google-services.json
+      - name: Set up google-services.json
+        run: echo "${{ secrets.GOOGLE_SERVICES_JSON_CONTENT }}" > app/google-services.json
         
       - name: Build
         run: flutter build apk --release -t "lib/main_dev.dart" --flavor dev --build-name=1.0.${{ github.run_number }} --build-number=${{ github.run_number }}
