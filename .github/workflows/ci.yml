@@ -37,6 +37,15 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Set up Firebase service account
+        run: echo "${{ secrets.SERVICE_CREDENTIALS_FILE_CONTENT }}" > service-account.json
+
+      - name: Authenticate Firebase CLI
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
+        run: |
+          npm install -g firebase-tools
+          firebase use --token "${{ secrets.FIREBASE_TOKEN }}"
 
       #      - name: Analyze
       #        run: flutter analyze
