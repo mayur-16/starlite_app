@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46475426739",
+    "project_id": "starlite-app",
+    "storage_bucket": "starlite-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46475426739:android:95b2a4eb217ac0117ee9c6",
+        "android_client_info": {
+          "package_name": "com.example.starlite_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46475426739-fbkajj7kf8rudfiq2gri30gqok01oa3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaVT6DuJjB19DZhWITPNU1Dwa3xo7tXZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46475426739-fbkajj7kf8rudfiq2gri30gqok01oa3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
