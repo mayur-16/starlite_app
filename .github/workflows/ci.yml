@@ -45,6 +45,7 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
         run: |
           npm install -g firebase-tools
+          firebase logout
           firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
 
       #      - name: Analyze
