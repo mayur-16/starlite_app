@@ -60,7 +60,10 @@ jobs:
             ${{ runner.os }}-firebase-
 
       - name: Upload artifact to Firebase App Distribution
-        run: |
-          firebase appdistribution:distribute "build/app/outputs/flutter-apk/app-dev-release.apk" --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} --groups internal_testers --release-notes "Version ${{ github.run_number }}"
-        env:
-          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.5.0
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID_ANDROID }}
+          serviceCredentialsFileContent: ${{ secrets.SERVICE_CREDENTIALS_FILE_CONTENT }}
+          groups: internal_testers
+          file: build/app/outputs/flutter-apk/app-dev-release.apk
+        id: firebase-upload
