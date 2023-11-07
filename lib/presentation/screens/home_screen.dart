@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Assets.appIcons.starliteLogo.image(height: 50, width: 80),
         ),
         drawer: const Drawer(),
-        body: BlocConsumer<DatabaseCubit, DatabaseState>(
+        body:  BlocConsumer<DatabaseCubit, DatabaseState>(
           listener: (_, state) {
             if (state is DatabaseInitializationFailed) {
               Utils.showSnackBar('Database Initialization Failed');
