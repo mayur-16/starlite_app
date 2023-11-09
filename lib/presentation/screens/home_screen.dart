@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return LoadingScreen(
       child: Scaffold(
         appBar: AppBar(
-          title: Assets.appIcons.starliteLogo.image(height: 50, width: 85),
+          title: Assets.appIcons.starliteLogo.image(height: 55, width: 80),
         ),
         drawer: const Drawer(),
         body:  BlocConsumer<DatabaseCubit, DatabaseState>(
